@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Byndyusoft
+ * Copyright 2024 leeyeh
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,15 @@
 
 export interface ISonarCoverageReporterOptions {
   /**
-   * @default 80
+   * @default 40
    */
-  threshold: number;
+  threshold?: number;
+  /**
+   * @default true
+   */
+  enforceThreshold?: boolean;
+  /**
+   * @default false
+   */
+  verbose?: boolean;
 }

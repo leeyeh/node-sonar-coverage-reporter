@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Byndyusoft
+ * Copyright 2024 leeyeh
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,6 +54,10 @@ function makeContext(): Context {
   return context;
 }
 
+const mockExit = jest.spyOn(process, "exit").mockImplementation((): never => {
+  throw new Error("Not implemented");
+});
+
 describe("SonarCoverageReporter", () => {
   beforeAll(() => {
     FileWriter.startCapture();
@@ -65,6 +69,7 @@ describe("SonarCoverageReporter", () => {
 
   afterAll(() => {
     FileWriter.stopCapture();
+    mockExit.mockRestore();
   });
 
   it("must print success message", () => {
@@ -90,7 +95,10 @@ describe("SonarCoverageReporter", () => {
   });
 
   it("must print failure message", () => {
-    new SonarCoverageReporter().onStart(
+    new SonarCoverageReporter({
+      threshold: 80,
+      enforceThreshold: false,
+    }).onStart(
       makeReportNode({
         lines: {
           total: 1226,
@@ -107,6 +115,30 @@ describe("SonarCoverageReporter", () => {
     expect(FileWriter.getOutput()).toMatchInlineSnapshot(`
       "[31;1mSonar coverage: 70.1%[0m
       ================================================================================
+      "
+    `);
+  });
+
+  it("must print failure message and exit 1", () => {
+    new SonarCoverageReporter({ threshold: 80 }).onStart(
+      makeReportNode({
+        lines: {
+          total: 1226,
+          covered: 900,
+        },
+        branches: {
+          total: 194,
+          covered: 96,
+        },
+      }),
+      makeContext(),
+    );
+
+    expect(mockExit).toHaveBeenCalledWith(1);
+
+    expect(FileWriter.getOutput()).toMatchInlineSnapshot(`
+      "[31;1mSonar coverage: 70.1%[0m
+      [31;1mTest failed as the coverage < 80%[0m
       "
     `);
   });

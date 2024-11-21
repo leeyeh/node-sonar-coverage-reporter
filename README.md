@@ -42,6 +42,12 @@ With [options](./src/sonarCoverageReporterOptionsInterface.ts):
 }
 ```
 
+## Changelogs
+
+### 1.1.0
+
+- New options: `enforceThreshold` and `verbose`.
+
 ## Maintainers
 
 - [@Byndyusoft/owners](https://github.com/orgs/Byndyusoft/teams/owners) <<github.maintain@byndyusoft.com>>
