@@ -1,17 +1,17 @@
 {
-  "name": "@byndyusoft/sonar-coverage-reporter",
+  "name": "@leeyeh/sonar-coverage-reporter",
   "version": "0.0.0-development",
   "description": "SonarQube coverage reporter for Istanbul",
-  "homepage": "https://github.com/Byndyusoft/node-sonar-coverage-reporter#readme",
+  "homepage": "https://github.com/leeyeh/node-sonar-coverage-reporter#readme",
   "bugs": {
-    "url": "https://github.com/Byndyusoft/node-sonar-coverage-reporter/issues"
+    "url": "https://github.com/leeyeh/node-sonar-coverage-reporter/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Byndyusoft/node-sonar-coverage-reporter.git"
+    "url": "https://github.com/leeyeh/node-sonar-coverage-reporter.git"
   },
   "license": "Apache-2.0",
-  "author": "Byndyusoft",
+  "author": "leeyeh",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
